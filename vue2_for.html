@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for지시자</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(item, idx) in items">{{idx}} => {{item}}</li>
+        </ul>
+        <span v-for="n in 9">{{n }}</span>
+        <p v-for="num in 9">{{dan}} * {{num}} = {{num*dan}}</p>
+        <table>
+            <tr v-for="person in persons">
+                <td>{{person.name}}</td>
+                <td v-text="person.score"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        new Vue({
+                el: "#app",
+                data: {
+                    items: ["vue.js","JScript","React","Java"],
+                    dan: 3,
+                    persons: [{name:"홍길동", score:80},
+                              {name:"김현희", score:90},
+                              {name:"황수박", score:70}]
+                }
+            })
+    </script>
+
+    <!-- div#show -->
+    <div id="show">
+        <dl>
+            <template v-for="fruit in fruits">
+                <dt>{{fruit.name}}</dt>
+                <dd>{{fruit.desc}}</dd>
+            </template><!--template태그를 쓰면 반복을 하고 소멸 div는 남아있음-->
+        </dl>
+        <ul>
+            <li v-for="(val, prop, idx) in obj">{{idx}} : {{prop}} => {{val}}</li>
+        </ul>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#show',
+            data: {
+                fruits: [{name:"사과", desc:"청송사과"},
+                         {name:"배", desc:"나주배"}],
+                obj: {
+                    firstName: "kildong",
+                    lastName: "Hong",
+                    age: 20
+                }
+            }
+        })
+    </script>
+</body>
+</html>

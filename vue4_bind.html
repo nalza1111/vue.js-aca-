@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+    <style>
+        .myclass {
+            color:blueviolet;
+        }
+        .custClass {
+            color: blue;
+        }
+        .cust2 {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+       <p style="color: red; background-color:yellow">테스트</p>
+       <hr>
+       <p v-bind:style="{color: myColor, 'background-color': myBack}">Bind</p><a href=""><img src=""></a>
+       <p v-bind:style="myStyle">직접클래스지정</p>
+       <p class="myclass custclass">직접클래스지정2</p>
+       <div v-bind:class="myClass">bind클래스지정</div>
+       <div v-bind:class="[myClass, myClass2]">복합</div>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+            myColor: 'red',
+            myBack: 'yellow',
+            myStyle: {
+                color: 'yellow',
+                'background-color': 'blue',
+                border: '1px solid red'
+            },
+            myClass: 'custClass',
+            myClass2: 'cust2'
+        },
+      })
+    </script>
+</body>
+</html>

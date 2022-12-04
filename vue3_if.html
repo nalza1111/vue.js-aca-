@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+
+    <div id="app">
+        <span v-if="val == 1">값 1(if) 입니다.</span>
+        <span v-else-if="val == 2">값 2(if) 입니다.</span>
+        <span v-else="val">1 이외의 값입니다.</span>
+
+        <span v-show="val">값 1(show) 입니다.</span>
+    </div>
+
+    <div id="show">
+        <ul>
+            <li v-for="item in itmes" v-if="item.location=='KR'">
+                {{item.company}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                val: 2
+            }
+        })
+
+        new Vue({
+            el: '#show',
+            data: {
+                itmes: [
+                    {company:"카카오", location:"KR"},
+                    {company:"다음", location:"KR"},
+                    {company:"구글", location:"US"}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

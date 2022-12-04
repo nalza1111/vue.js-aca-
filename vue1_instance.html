@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div class="app">
+
+        </div>
+        <div id="app"><!-- Vue 인스턴스가 처리하기 위한 DOM => template이라 부름-->
+            <b>Good {{message}} Bye</b> <!--문자열 보간법: {{}}, v-text-->
+            <span v-text="message">Hi~</span>
+            <ul>
+                <li v-text="message"></li>
+                <li v-html="message"></li>
+                <li v-text="apple"></li>
+                <li v-html="banana"></li>
+            </ul>
+            <!-- 속성보간법: attribute값을 지정. -->
+            <div v-bind:id="myId">{{apple}}</div> <!--속성지시자 v-bind-->
+            <button v-bind:disabled="btnDisable">Click</button>
+            <a href="https://www.daum.net" v-bind:href="newHref" v-text="hrefText">Daum</a>
+            <p>{{isOK?"I'm OK":"I'm bad"}}</p>
+            <p>{{score>60 ? "pass" : "fail"}}</p>
+            <p>{{fruits[1]}}</p>
+            <p v-once>{{message}}</p><!--뒤에 message를 변경해줬는데도 초기값이 출력됨-->
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data:{
+                fruits: ["사과", "옥수수", "고구마"],
+                score: 88,
+                isOK: true,
+                message: "<b>Hello, World</b>",
+                apple: "사과",
+                banana: "바나나",
+                myId: 'tbl',
+                btnDisable: true,
+                newHref: "https://www.google.com",
+                hrefText: "Google"
+            }
+        });
+
+        console.log(app);
+      //  console.log(app.$data.message);
+      //  app.$data.message = "New World" // 이렇게 변경가능
+        app.message = "Nice World" // 이렇게도
+        app.btnDisable = false;
+        app.hrefText = "naver(바꿈)";
+        app.newHref = "https://www.naver.com";
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue2_forsort</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-for="lang in languages">
+            <span>{{lang.id}}, {{lang.title}}</span>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                languages: [
+                    {id: 1, title: 'Vue.js'},
+                    {id: 2, title: 'React.js'},
+                ]
+            }
+        });
+        app.languages.push({id: 3, title: 'javaScript.js'})
+        app.languages.splice(0, 0, {id:4,title:'Java'})//splice추가삭제변경가능
+
+        app.languages.sort(function(first, last){ //sort정렬기준값을 func으로 매개값으로 줌
+            if(first.id > last.id){
+                return -1; //내림차순 오름차순 1 
+            } else {
+                return 1;
+            }
+        })
+
+        let ary =  [1,4,2,6,3]
+        console.log(ary.sort().reverse());
+    </script>
+</body>
+</html>

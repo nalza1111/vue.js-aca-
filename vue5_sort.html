@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="stuId">학번순정렬</button>
+        <button v-on:click="stuName">이름순정렬</button>
+        <button v-on:click="stuScore">성적순정렬</button>
+
+        <!--select 버튼-->
+        <select v-on:change="sort($event)">
+            <option>::선택::</option>
+            <option value="id">학번순</option>
+            <option value="name">이름순</option>
+            <option value="score">성적순</option>
+        </select>
+
+        <!-- radio 버튼. -->
+        <div>
+            <label for="">
+                <input type="radio"value="stuId" v-on:click="stuId">학번순
+            </label>
+            <label for="">
+                <input type="radio" value="stuName" v-on:click="stuName">이름순
+            </label>
+            <label for="">
+                <input type="radio"value="stuScore" v-on:click="stuScore">성적순
+            </label>
+        </div>
+        <ul>
+            <li v-for="stu in studentsSort">{{stu}}</li>
+        </ul>
+    </div>
+
+    <script>
+        let members = [
+            {id: 99, name:"Hong", score:70},
+            {id: 103, name:"Park", score:95},
+            {id: 102, name:"Kim", score:80},
+            {id: 100, name:"Choi", score:60},
+        ]
+        let app = new Vue({
+            el: '#app',
+            data: {
+                studentsSort: [],
+            },
+            methods: {
+                stuId() {
+                    this.studentsSort = members.sort(function(first, last){
+                        if(first.id<last.id){
+                            return -1;
+                        } else return 1;
+                    })
+                },
+                stuName() {
+                    this.studentsSort = members.sort(function(first, last){
+                        if(first.name<last.name){
+                            return -1;
+                        } else return 1;
+                    })
+                },
+                stuScore() {
+                    this.studentsSort = members.sort(function(first, last){
+                        if(first.score<last.score){
+                            return -1;
+                        } else return 1;
+                    })
+                },
+                sort(th){
+                    console.log(th.target)
+                    if(th.target.value=='id'){
+                        this.stuId()
+                    } else if(th.target.value=='name'){
+                        this.stuName()
+                    } else if(th.target.value=='score'){
+                        this.stuScore()
+                    }
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

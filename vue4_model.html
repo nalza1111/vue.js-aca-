@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+    <style>
+      
+    </style>
+</head>
+<body>
+
+    <div id="app">
+       <textarea v-model="myText" v-bind:rows="rowCnt" v-bind:col="colCnt"></textarea>
+       <p>문장은, [{{myText}}]</p>
+       <p>문장수는, [{{myText.length}}]</p>
+        <div>
+            <label for="">
+                <input type="checkbox" v-model="myhobbies" value="reading">독서
+            </label>
+            <label for="">
+                <input type="checkbox" v-model="myhobbies" value="movie">영화
+            </label>
+            <label for="">
+                <input type="checkbox" v-model="myhobbies" value="writing">글쓰기
+            </label>
+                <p>(체크박스) 취미 : {{myhobbies}}</p>
+        </div>
+        
+        <div>
+            <label for="">
+                <input type="radio" v-model="myradio" value="reading">독서
+            </label>
+            <label for="">
+                <input type="radio" v-model="myradio" value="movie">영화
+            </label>
+            <label for="">
+                <input type="radio" v-model="myradio" value="writing">글쓰기
+            </label>
+                <p>(radio) 취미 : {{myradio}}</p>
+        </div>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+            myText: "",
+            colCnt: 30,
+            rowCnt: 3,
+            myhobbies: [],
+            myradio: []
+        }
+      })
+    </script>
+
+    <div id="app2">
+        <select v-model="colors">
+            <option value="" disabled>색을 선택하세요.</option>
+            <option >Red</option>
+            <option >Blue</option>
+            <option >Green</option>
+            <option >Orange</option>
+        </select>
+        <p v-bind:style="{color:colors}">선택한 색상은{{colors}} 입니다</p>
+        <label for=""><input type="checkbox" v-model="agreement"></label>
+        <p>{{agreement}}</p>
+        <button v-bind:disabled="agreement == false">동의합니다.</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app2',
+            data: {
+                colors: [],
+                agreement: false
+            }
+        })
+    </script>
+</body>
+</html>

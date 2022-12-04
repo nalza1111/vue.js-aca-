@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="add"><!--input:text-->
+            <label for="">name: <input type="text" v-model="name"></label>
+            <label for="">score: <input type="number" v-model="score"></label>
+            <button v-on:click="insert()">등록</button>
+        </div>
+        <div class="list">
+            <ul>
+                <li v-for="(stu, idx) in students" v-bind:id=idx>
+                    이름: {{stu.name}}, 점수: {{stu.score}} 
+                    <button v-bind:id=idx  v-on:click="del(idx, name)">삭제</button>
+                    <button v-bind:id=idx  v-on:click="up(idx)">수정</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                students:[],
+                name: "",
+                score: ""
+            },
+            methods: {
+                del: function (idx, name) {
+                    this.students.splice(idx, 1);
+
+                    let idx2 = this.students.reduce(function(acc, curMember, curIdx){
+                        console.log(acc, curMember, curIdx)
+                        return curMember.name == name ? curIdx : acc;
+                    }, -1)
+                    console.log(idx2);
+                },
+                insert: function () {
+                    if(!this.name||!this.score){
+                        alert('null');
+                        return;
+                    }
+                    let student = {name: this.name, score: this.score};
+                    this.students.push(student);
+                    this.name = this.score = "";
+
+                    
+                },
+                up: function (idx){
+                    if(!this.name||!this.score){
+                        alert('null');
+                        return;
+                    }
+                    let student = {name: this.name, score: this.score};
+                    this.students.splice(idx, 1, student);
+                    this.name = this.score = "";
+
+                   
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        var origData = [
+            ['Task', 'Hours per Day'],
+            ['도시락', 3],
+            ['갈비탕', 2],
+            ['오므라이스', 2],
+            ['짬뽕', 2],
+            ['비빔밥', 7],
+            ['메밀소바', 3]
+        ];
+
+        function drawChart() {
+
+            var data = google.visualization.arrayToDataTable(origData);
+
+            var options = {
+                title: 'My Daily Activities',
+                is3D: true
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body>
+
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+
+    <div id="app">
+        <ul id="list">
+            <li v-for="(item, idx) in dataAry" v-if="idx>0">{{item[0]}}, {{idx}}<!-- v-?? 지시자-->
+                <button v-on:click="addOne(idx)">투표</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app', //가상 돔으로 만듬? eliment
+            data: {
+                dataAry: origData //속성으로 넣어줘 반복문을 실행?
+            },
+            methods: {
+                addOne: function (val) {
+                    console.log(this.dataAry[val]);
+                    this.dataAry[val][1]++;
+                    // var obj = this.dataAry[val];
+                    // obj[1]++;
+                    // this.dataAry.splice(val, 1, obj);
+                    drawChart();
+                }
+            }
+        }); // 뷰 인스턴스.
+
+       // console.log(app._data.dataAry, app.dataAry);
+    </script>
+     
+</body>
+
+</html>

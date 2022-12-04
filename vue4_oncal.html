@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2"></script>
+</head>
+<body>
+
+    <div id="app">
+        <h1>간단계산기</h1>
+        <input type="number" v-model="first">
+        <input type="number" v-model="second">
+        <button v-on:click="plus">더하기</button><!--plus-->
+        <button v-on:click="minus">빼기</button><!--minus-->
+        <button v-on:click="multiple">곱하기</button><!--multiple-->
+        <button v-on:click="divide(first, second)">나누기</button><!--divide-->
+        <p>결과는 {{result}}</p>
+    </div>
+
+    <script>
+       new Vue({
+            el: '#app',
+            data: {
+                first:null,
+                second:null,
+                result:null
+            },
+            methods: {
+                plus: function () {
+                    this.result = parseInt(this.first)+parseInt(this.second);
+                    this.nu();
+                },
+                minus: function () {
+                    this.result =this.first-this.second;
+                    this.nu();
+                },
+                multiple: function () {
+                    this.result = this.first*this.second;
+                    this.nu();
+                },
+                divide: function (fir, sec) {
+                    this.result = fir/sec;
+                    this.nu();
+                },
+                nu: function () {
+                    this.first=this.second=null;
+                }
+            }
+       })
+    </script>
+    <div id="app2">
+        <ul>
+            <li v-for="a in filterAry">{{a}}</li>
+        </ul>
+        <button v-on:click="event1()">짝수만 출력</button><!--event1()-->
+        <button v-on:click="event2()">홀수만 출력</button><!--event2()-->
+    </div>
+    <script>
+        new Vue({
+            el: '#app2',
+            data: {
+                ary: [1, 2, 3, 4, 5, 6, 7, 8],
+                filterAry: []
+            },
+            methods: {
+                event1: function () {
+                    this.filterAry = this.ary.filter(function(val, inx){
+                        return val%2==0; //참값만 보냄
+                    })
+                },
+                event2: function () {
+                    this.filterAry = this.ary.reduce(function(acc, curVal, curIdx, ary){
+                        console.log(acc, curVal, curIdx);
+                        if(curVal%2!=0){
+                            acc.push(curVal);
+                        }
+                        return acc;
+                    }, [])
+                }
+            }
+        })
+    </script>
+</body>
+</html>
