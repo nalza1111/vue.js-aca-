@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array.html</title>
+    <script>
+        let students = [
+            {stno: '1-111', name: "홍길동", math: 80, height: 170.5},
+            {stno: '1-112', name: "김민수", math: 90, height: 167.5},
+            {stno: '1-113', name: "김익수", math: 85, height: 175.5}
+        ]
+        let over170 = []
+        for(let i=0; i<students.length; i++){
+            if(students[i].height > 170){
+                over170.push(students[i])
+            }
+        }
+        function over170Fnc(student, idx, ary){
+            if(student.height > 170){
+                return true;
+            }
+        }
+        function over80Fnc(val, idx, ary){
+            if(val.math >= 80){
+                return true;
+            }
+        }
+        over170 = students.filter(over170Fnc);
+        console.log(over170);
+        over170 = students.filter(over80Fnc);
+        console.log(over170);
+
+        let mapAry = students.map(function(val, idx, array){
+            let member = {}
+            member.id = val.stno;
+            member.fname = val.name;
+            member.score = val.math;
+            return member;
+        }).filter(function(val, idx, ary){
+            if(val.score>80){
+                return;
+            }
+        })
+        console.log(mapAry);
+        let numbers = [34, 45, 28, 52, 33];
+        let result = numbers.reduce(function(acc, curVal, curIdx, ary){
+            console.log(acc, curVal, curIdx);
+            return acc + curVal;
+        },0)
+        let result2 = numbers.reduce(function(acc, curVal, curIdx, ary){
+            console.log(acc, curVal, curIdx);
+            return acc > curVal ? acc : curVal;
+        },0)
+        let result3 = numbers.reduce(function(acc, curVal, curIdx, ary){
+            console.log(acc, curVal, curIdx);
+            if(curIdx % 2 == 0){
+                acc.push(curVal)
+            }
+            return acc;
+        },[])
+        let result5 = numbers.reduce(function(acc, curVal, curIdx, ary){ // splice()
+            console.log(acc, curVal, curIdx);
+            if(curIdx<numbers.length-1){
+                return acc + curVal;
+            } else {
+                return acc/(curIdx+1);
+            }
+        }, 0); //초기값
+        console.log('결과값: ', result5);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

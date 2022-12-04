@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>vue2_forfilter2</title>
+        <script src="https://unpkg.com/vue@2"></script>
+    </head>
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <input type="checkbox" v-on:change="numbereChange">
+        <ul>
+            <li v-for="num in filterNum">{{num}}</li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: false,
+                numbers: [1,2,3,4,5,6,7,8,9]
+            },
+            methods: {
+                numbereChange(){
+                    this.message = !this.message;
+                }
+            },
+            computed: {
+                filterNum() {
+                    var message = this.message;
+                    return this.numbers.filter(function(item, idx, ary){
+                        if(message==true){
+                            return item % 2 == 0;
+                        } else {
+                            return item % 2 !=0;
+                        }
+                    })
+                }
+            }
+        })
+        app.numbers.push(5);
+    </script>
+</body>
+</html>

@@ -9,12 +9,13 @@
 </head>
 <body>
     <div id="app">
-        <button v-on:click="stuId">학번순정렬</button>
-        <button v-on:click="stuName">이름순정렬</button>
-        <button v-on:click="stuScore">성적순정렬</button>
-
+        <div>
+            <button v-on:click="idSort">학번순정렬</button>
+            <button v-on:click="nameSort">이름순정렬</button>
+            <button v-on:click="scoreSort">성적순정렬</button>
+        </div>
         <!--select 버튼-->
-        <select v-on:change="sort($event)">
+        <select v-model="Myradio">
             <option>::선택::</option>
             <option value="id">학번순</option>
             <option value="name">이름순</option>
@@ -24,17 +25,17 @@
         <!-- radio 버튼. -->
         <div>
             <label for="">
-                <input type="radio"value="stuId" v-on:click="stuId">학번순
+                <input type="radio" value="id" v-model="Myradio">학번순
             </label>
             <label for="">
-                <input type="radio" value="stuName" v-on:click="stuName">이름순
+                <input type="radio" value="name" v-model="Myradio">이름순
             </label>
             <label for="">
-                <input type="radio"value="stuScore" v-on:click="stuScore">성적순
+                <input type="radio" value="score" v-model="Myradio">성적순
             </label>
         </div>
         <ul>
-            <li v-for="stu in studentsSort">{{stu}}</li>
+            <li v-for="stu in sort">{{stu}}</li>
         </ul>
     </div>
 
@@ -48,41 +49,30 @@
         let app = new Vue({
             el: '#app',
             data: {
-                studentsSort: [],
+                Myradio: ''
             },
-            methods: {
-                stuId() {
-                    this.studentsSort = members.sort(function(first, last){
-                        if(first.id<last.id){
+            computed: {
+                sort(){
+                    let so = this.Myradio;
+                    return members.sort(function(first, last){
+                        if(first[so]<last[so]){
                             return -1;
                         } else return 1;
-                    })
+                     })
+                 },
+            },
+            methods:{
+                idSort() {
+                    this.Myradio = 'id';
                 },
-                stuName() {
-                    this.studentsSort = members.sort(function(first, last){
-                        if(first.name<last.name){
-                            return -1;
-                        } else return 1;
-                    })
+                nameSort() {
+                    this.Myradio = 'name';
                 },
-                stuScore() {
-                    this.studentsSort = members.sort(function(first, last){
-                        if(first.score<last.score){
-                            return -1;
-                        } else return 1;
-                    })
-                },
-                sort(th){
-                    console.log(th.target)
-                    if(th.target.value=='id'){
-                        this.stuId()
-                    } else if(th.target.value=='name'){
-                        this.stuName()
-                    } else if(th.target.value=='score'){
-                        this.stuScore()
-                    }
+                scoreSort() {
+                    this.Myradio = 'score';
                 }
             }
+
         })
     </script>
     

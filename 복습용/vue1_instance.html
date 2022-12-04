@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div class="app">
+
+        </div>
+        <div id="id">
+            <ul>
+                <li v-text="message"></li>
+                <li v-html="message"></li>
+                <li v-text="apple   "></li>
+                <li v-html="banana"></li>
+            </ul>
+            <div v-bind:id="myId">{{apple}}</div>
+            <button v-bind:disabled="btnDisabled">cl</button>
+            <a href="https://www.daum.net" v-bind:href="newHref" v-text="hrefText">Daum</a>
+            <p>{{isOK?"I'm OK":"I'm bad"}}</p>
+            <p>{{fruits[0]}}</p>
+            <p v-once>{{message}}</p>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#id',
+            data: {
+                fruits: ["사과", "옥수수", "고구마"],
+                score: 88,
+                isOK: true,
+                message: "<b>Hello, World</b>",
+                apple: "사과",
+                banana: "바나나",
+                myId: 'tb1',
+                btnDisabled: true,
+                newHref: "https://www.google.com",
+                hrefText: "Google"
+            }
+        })
+        console.log(app);
+        console.log(app.$data.message)
+    </script>
+</body>
+</html>

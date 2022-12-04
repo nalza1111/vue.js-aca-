@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://unpkg.com/vue@2"></script>
+    </head>
+<body>
+    <div id="app">
+        <p>{{count}}</p>
+        <button v-on:click="countUp">더하기</button>
+        <button v-on:click="countUp(num)">3 더하기</button>
+        <p>{{name}}</p>
+        <button v-on:click="changeName">이름변경</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                count: 0,
+                num: 3,
+                name: null,
+                namec:  ["Hong", "Hwang", "park", "Choi"],
+                n: 0
+            },
+            methods: {
+                countUp(){
+                    this.count++;
+                },
+                countUp(num){
+                    this.count += num;
+                },
+                changeName(){
+                    this.name=this.namec[this.n++%4];
+                }
+            }
+        })
+    </script>
+</body>
+</html>

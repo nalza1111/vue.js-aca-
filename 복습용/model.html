@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://unpkg.com/vue@2"></script>
+    </head>
+<body>
+    <div id="app">
+        <textarea v-model="myText" v-bind:rows="rowCnt" v-bind:col="colCnt"></textarea>
+        <p>{{myText}}</p>
+        <p>{{myText.length}}</p>
+        <div>
+            <label for="">
+                <input type="checkbox" v-model="myhobbies" value="reading">독서
+            </label>
+            <label for="">
+                <input type="checkbox" v-model="myhobbies" value="movie">영화
+            </label>
+            <label for="">
+                <input type="checkbox" v-model="myhobbies" value="writing">글쓰기
+            </label>
+            {{myhobbies}}
+        </div>
+        <div>
+            <label for="">
+                <input type="radio" v-model="myradio" value="reading">독서
+            </label>
+            <label for="">
+                <input type="radio" v-model="myradio" value="movie">영화
+            </label>
+            <label for="">
+                <input type="radio" v-model="myradio" value="writing">글쓰기
+            </label>
+            {{myradio}}
+        </div>
+        <div>
+            <select v-model="colors">
+                <option value="" disabled>색</option>
+                <option  value="a" >Red</option>
+                <option >Blue</option>
+                <option >Green</option>
+                <option >Orange</option>
+            </select>
+            {{colors}}
+            <p v-bind:style="{color:colors}">{{colors}}</p>
+            <label for="">
+                <input type="checkbox" v-model="agreement">
+            </label>
+            <p>{{agreement}}</p>
+            <button v-bind:disabled="agreement == false">동의합니다.</button>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                myText: "",
+                colCnt: 100,
+                rowCnt: 5,
+                myhobbies: [],
+                myradio: [],
+                colors: [],
+                agreement: false
+            }
+        })
+    </script>
+</body>
+</html>

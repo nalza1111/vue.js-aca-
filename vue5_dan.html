@@ -6,29 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dan</title>
     <script src="https://unpkg.com/vue@2"></script>
-    <style>
-    .rating-active:before {
-        content: "\2605";
-        position: absolute;
-    }
-    .rating {
-        display: inline;
-        margin-left: 10px;
-        margin-top: 10px;
-        float:right;
-    }
-    .rating > span {
-        display: inline-block;
-        position: relative;
-        width: 1.1em;
-    }
-    </style>
 </head>
 <body>
-    <div class="rating">
-        <span class="rating-active">☆</span>
-        <span>☆</span>
-    </div>
     <div id="app">
         <input v-model.number="dan" v-on:input="del()">
         <button v-on:click="mul()">출력</button>
