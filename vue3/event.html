@@ -12,7 +12,7 @@
     <script>
         txt.addEventListener("keypress", function(ev){
             console.log(ev.keycode) //이벤트객체
-            console.log('keypress', ev, ev.keycode) //keyUp, keyDown
+            console.log('keypress', ev, ev.keyCode) //keyUp, keyDown
         })
         txt.addEventListener("change", function(ev){ //input바뀌면(커서넘어가면)
             console.log('change', this.value)

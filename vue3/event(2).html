@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            margin: 10px;
+            border: 1px solid red;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="diva">a
+        <div id="divb">b
+            <a href="https://www.naver.com/" id="divc">네이버로</a>
+        </div>
+    </div>
+    <script>
+        diva.addEventListener("click", function(ev){
+            alert('a');
+        })
+        divb.addEventListener("click", function(ev){
+            ev.stopPropagation() //부모 태그로 이벤트 전파 막음
+            alert('b');
+        })
+        divc.addEventListener("click", function(ev){
+            //ev.stopPropagation();
+            let Tf = confirm('페이지이동하겠음?')
+            if(Tf){
+
+            } else {
+                ev.preventDefault(); //자기 이벤트 막음
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>users.html</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        label{
+            width: 80px;
+            display: inline-block;
+        }
+        input{
+            width: 100px;
+            display: inline-block;
+        }
+        .backColor{
+            background-color: yellow;
+        }
+    </style>
+    <div id="app">
+        <form>
+            <label for="pw">password: </label><input type="text" v-model.trim="pw" id="pw" name="pw"><br>
+            <label for="role">role: </label><input type="text" v-model.trim="role" id="role" name="role"><br>
+            <label for="name">name: </label><input type="text" v-model.trim="name" id="name" name="name"><br>
+            <label for="id">id: </label><input type="text" v-model.trim="id" id="id" name="id"><br>
+            <button type="button" @click="insertUser">등록</button>
+        </form>
+        <div>
+            <ul>
+                <li v-for="(user, idx) in users" :class="{backColor:yellow}" @click="cssUser(user)"><span v-for="(val, key) in user">{{key}}: {{val}}&nbsp;&nbsp; </span>
+                    <button type="button" @click="deleteUser(user)">삭제</button>
+                    <button type="button" @click="updateUser(idx)">업데이트</button></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        const { createApp }= Vue
+        createApp({
+            data(){
+               return {
+                    users: [],
+                    pw: '',
+                    role: '',
+                    name: '',
+                    id: '',
+                    yellow:false
+                }
+            },
+            created() {
+                let url = 'http://localhost:8081/myserver/userSelectAll'
+                fetch(url)
+                 .then(res => res.json())
+                 .then(res => this.users = res );
+            },
+            methods : {
+                //등록
+                insertUser(){
+                    let url = `http://localhost:8081/myserver/userInsert?id=${this.id}&password=${this.pw}&name=${this.name}&role=${this.role}`
+                    fetch(url)
+                     .then(res=>res.json())
+                     .then(res=>{
+                        this.users.push(res)
+                        this.pw = '',
+                        this.role = '',
+                        this.name = '',
+                        this.id = ''
+                    })
+                },
+                //삭제
+                deleteUser(user){
+                    console.log(user.id);
+                    let url = `http://localhost:8081/myserver/userDelete?id=${user.id}`
+                    fetch(url)
+                     .then(res => res.json())
+                     .then(res => {
+                        let newUsers = []
+                        for(u of this.users){
+                            if(u.id!=user.id)
+                            newUsers.push(u);
+                        }
+                        this.users = newUsers;
+                     })
+                },
+                //스타일
+                cssUser(user){
+                    this.yellow = !this.yellow;
+                    console.log(user.pw)
+                    this.pw = user.password;
+                    this.role = user.role;
+                    this.name = user.name;
+                    this.id = user.id
+                }
+            }
+        }).mount("#app")
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
