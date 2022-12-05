@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="txt">
+    <input type="text" id="txt2">
+    <script>
+        txt.addEventListener("keypress", function(ev){
+            console.log(ev.keycode) //이벤트객체
+            console.log('keypress', ev, ev.keycode) //keyUp, keyDown
+        })
+        txt.addEventListener("change", function(ev){ //input바뀌면(커서넘어가면)
+            console.log('change', this.value)
+        })
+    </script>
+</body>
+</html>

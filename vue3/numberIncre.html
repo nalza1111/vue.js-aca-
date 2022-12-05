@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        .active {
+            background: rgb(190, 80, 80);
+            color: #fff;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-if="showYn">
+            {{number}}
+            <input type="number" v-model.number.lazy.trim="number">
+            <span v-text="number" :class="{ active : checked }"></span><!--v-bind생략가능-->
+            <button @click="incre">증가</button>
+        </div>
+    </div>
+    <script>
+        const { createApp } = Vue //뷰안에서 createApp함수 꺼내사용
+        createApp({
+            data(){//3단계는 데이터객체에서 함수로바뀜//리턴에 작성
+                return {
+                    number : 0,
+                    showYn : true,
+                    checked : true
+                }
+            },
+            created(){console.log('created')},//생성시
+            mounted(){console.log('mounted')},//가상돔에 접근할때 사용
+            updated(){console.log('updated')},
+            methods : {
+                //key: val,
+                decre(){},
+                incre: function(){
+                    this.number++;
+                },
+
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

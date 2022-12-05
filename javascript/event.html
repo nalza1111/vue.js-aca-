@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event.html</title>
+    <style>
+        div {
+            padding: 20px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="diva">a
+        <div id="divb">b
+            <div id="divc">c <a id="naver" href="http://www.naver.com">네이버</a></div>
+        </div>
+    </div>
+    <script>
+        //부모태그에 같은 종류의 이벤트가 있으면 전부 실행됨(전파)
+        diva.addEventListener("click",function(){
+            alert('diva clcik');
+        })
+        divb.addEventListener("click",function(){
+            alert('divb clcik');
+        })
+        divc.addEventListener("click",function(ev){
+          //  ev.stopPropagation();
+            alert('divc clcik');
+        })
+        naver.addEventListener("click", function(ev){
+            ev.stopPropagation(); //부모로의 전파금지
+            let yn = confirm("이동할가요");
+            if(yn) {
+                console.log("이동함");
+            } else {
+                console.log("이동안함");
+                ev.preventDefault(); //a, submit에서 사용 원래기능금지
+            }
+        })
+    </script>
+</body>
+</html>
