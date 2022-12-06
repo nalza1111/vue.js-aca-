@@ -170,35 +170,21 @@
                     console.log(res) //json은 자동으로 해주기 때문에 json()안해도 됨
                     this.todos = res.data}
                     )
-                // fetch(url)
-                //  .then(result => result.json())
-                //  .then(result => this.todos = result)
             },
             methods : {
                 todoUpdate(todo) {
                   let yn = todo.todoyn==0?1:0;
-                  // let url = "http://localhost:8081/myserver/todoUpdate";
-                  // axios.get(url, { params : {no : todo.no, todoyn : yn}})
-                  //   .then(res => todo.todoyn = res.todoyn)
-
-                    //업데이트하는중~~~~~
-
-                    url = `http://localhost:8081/myserver/todoUpdate?no=${todo.no}&todoyn=${yn}`;
-                    fetch(url)
-                     .then(res=>res.json())
-                     .then(res=>{
-                        todo.todoyn = res.todoyn;
-                     })
+                    let url = "http://localhost:8081/myserver/todoUpdate";
+                    axios.get(url, { params: {no : todo.no, todoyn : yn}})
+                      .then(res => todo.todoyn = res.data.todoyn)
                 },
                 todoDelete(idx, no) {
-                  let url = "http://localhost:8081/myserver/todoDelete"
-                  axios.get()
-                  url =`http://localhost:8081/myserver/todoDelete?no=${no}`;
-                  fetch(url)
-                    .then(res=>res.json())
-                    .then(res=>{
-                      let newtodo = [];
-                      for(let todo of this.todos){
+                  let url = "http://localhost:8081/myserver/todoDelete";
+                  axios.get(url, { params: {no: no}})
+                    .then(res => {
+                        console.log(res)
+                        let newtodo = [];
+                        for(let todo of this.todos){
                           if(todo.no!=no){
                               newtodo.push(todo)
                           }

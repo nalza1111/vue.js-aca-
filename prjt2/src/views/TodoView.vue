@@ -58,7 +58,6 @@ export default {
                       }
                       this.todos = newtodo; //기존의 배열을 건들지 않음
                     })
-                  url =`http://localhost:8081/myserver/todoDelete?no=${no}`;
                 },
                 todoInsert(inputTxt) {
                     console.log(inputTxt)
