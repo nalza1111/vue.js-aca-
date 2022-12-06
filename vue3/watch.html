@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>computed.html</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{fullName}} <!--변경해야 보임-->
+    </div>
+    <script>
+        const { createApp } = Vue
+        createApp({
+            data() {
+                return {
+                    firstName : '길동',
+                    lastName : '홍',
+                    fullName : ''
+                }
+            },
+            watch : {
+                firstName() {
+                    this.fullName = this.firstName + this.lastName
+                },
+                lastName() {
+                    this.fullName = this.firstName + this.lastName
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

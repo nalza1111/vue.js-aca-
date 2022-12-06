@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>computed.html</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{area}}
+    </div>
+    <script>
+        const { createApp } = Vue
+        createApp({
+            data() {
+                return {
+                    width : 3,
+                    height : 10,
+                }
+            },
+            created() {
+
+            },
+            mounted() {
+
+            },
+            methods: {
+
+            },
+            computed : {
+                area() { //함수이면서 데이터
+                    return this.width*this.height;
+                }
+            }
+        }).mount("#app")
+    </script>
+</body>
+</html>

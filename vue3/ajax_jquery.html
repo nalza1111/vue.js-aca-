@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax.html</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="result">
+
+    </div>    
+    <script>
+        $.ajax({
+            url : 'http://localhost:8081/myserver/userSelectAll',
+            success : function(res){
+                console.log(res);
+                //응답결과를 idv에 출력
+                //result.innertTex = res // JSON.stringfy(res)
+                //id만출력
+                for( user of res ){
+                    //result.innerHTML += `<div>${user.id}</div>`
+                    $('#result').append(`<div>${user.id}</div>`);
+                }
+                // $('#result').append('<ul>');
+                // $.each(res,function(inx, val){
+                // $("ul").append($("<li>").text(val.id));
+                
+                //첫번째 단건조회
+                let id = res[0].id;
+                $.ajax({
+                    url : `http://localhost:8081/myserver/userSelect?id=${id}`,
+                    success : function(res){
+                        console.log(res)
+                    },
+                    error : function(err){
+                        console.log(err)
+                    }
+                })
+            },
+            error : function(err){
+                console.log(err)
+            }
+        })
+    </script>
+</body>
+</html>

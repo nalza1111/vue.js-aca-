@@ -14,8 +14,8 @@
     <script>
         let url = 'http://localhost:8081/myserver/empSelect'
         fetch(url)
-         .then(res => res.json())
-         .then(res => console.log(res[0].first_name))
+         .then(res => res.json()) // 프로미스객체기 때문에 .then 사용가능
+         .then(res => console.log(res[0].first_name)) //프로미스객체x .then 사용불가
     </script>
 </body>
 </html>
