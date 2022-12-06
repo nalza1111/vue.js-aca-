@@ -11,7 +11,7 @@
             width: 80px;
             display: inline-block;
         }
-        input{
+        input, select{
             width: 100px;
             display: inline-block;
         }
@@ -22,9 +22,13 @@
     <div id="app">
         <form>
             <label for="pw">password: </label><input type="text" v-model.trim="pw" id="pw" name="pw"><br>
-            <label for="role">role: </label><input type="text" v-model.trim="role" id="role" name="role"><br>
             <label for="name">name: </label><input type="text" v-model.trim="name" id="name" name="name"><br>
             <label for="id">id: </label><input type="text" v-model.trim="id" id="id" name="id"><br>
+            <label for="role">role: </label>
+            <select v-model="role" id="role" name="role">
+                <option disabled>::선택::</option>
+                <option v-for="(val, idx) in job" v-bind:value="idx">{{val}}</option>
+            </select> <br>
             <button type="button" @click="insertUser">등록</button>
         </form>
         <div>
@@ -45,7 +49,12 @@
                     role: '',
                     name: '',
                     id: '',
-                    yellow:false
+                    yellow:false,
+                    job: {
+                        User: '유저',
+                        Admin: '운영자'
+                    }
+
                 }
             },
             created() {
@@ -57,16 +66,14 @@
             methods : {
                 //등록
                 insertUser(){
-                    let url = `http://localhost:8081/myserver/userInsert?id=${this.id}&password=${this.pw}&name=${this.name}&role=${this.role}`
+                    let url = `http://localhost:8081/myserver/userInsert?id`+
+                    `=${this.id}&password=${this.pw}&name=${this.name}&role=${this.role}`
                     fetch(url)
                      .then(res=>res.json())
                      .then(res=>{
                         this.users.push(res)
-                        this.pw = '',
-                        this.role = '',
-                        this.name = '',
-                        this.id = ''
                     })
+                    this.init();
                 },
                 //삭제
                 deleteUser(user){
@@ -81,16 +88,41 @@
                             newUsers.push(u);
                         }
                         this.users = newUsers;
-                     })
+                        this.init();
+                    })
                 },
-                //스타일
+                //초기화
+                init(){
+                    this.pw = '',
+                    this.role = '',
+                    this.name = '',
+                    this.id = ''
+                },
+                //클릭, 스타일
                 cssUser(user){
                     this.yellow = !this.yellow;
-                    console.log(user.pw)
+
                     this.pw = user.password;
                     this.role = user.role;
                     this.name = user.name;
                     this.id = user.id
+                },
+                updateUser(){
+                    let url = `http://localhost:8081/myserver/userUpdate?id`+
+                    `=${this.id}&password=${this.pw}&name=${this.name}&role=${this.role}`
+                    fetch(url)
+                     .then(res=>res.json())
+                     .then(res=>{
+                        console.log(res)
+                        let inx=0;
+                        this.users.forEach((ele, idx) => {
+                            if(ele.id==this.id){
+                                inx=idx;
+                            }
+                        })
+                        this.users.splice(inx, 1, res);
+                        this.init();
+                    })
                 }
             }
         }).mount("#app")
