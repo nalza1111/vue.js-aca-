@@ -12,11 +12,9 @@
 export default {
     name: "TodoInput",
     data() {
-                return{
-                    inputTxt : '',
-                }
-    },
-    created() {
+            return{
+                inputTxt : '',
+            }
     },
     methods : {
         todoInsert() {

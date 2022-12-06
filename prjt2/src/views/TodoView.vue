@@ -16,12 +16,10 @@
 <script>
 import axios from 'axios';
 import TodoInput from '@/components/TodoInput.vue'
-//import TodoList from '@/components/TodoList.vue'
 
 export default {
     components: {
         TodoInput,
-        //TodoList
     },
     data() {
                 return{
